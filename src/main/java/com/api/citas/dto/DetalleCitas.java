@@ -28,11 +28,18 @@ public class DetalleCitas {
     @Getter
     @Setter
     private float precio;
+    
+    @Getter
+    @Setter
+    private int cantidad;
 
-    public DetalleCitas(int idCita, int numProd, String nomProd, float precio) {
+    public DetalleCitas(int idCita, int numProd, String nomProd, float precio, int cantidad) {
         this.idCita = idCita;
         this.numProd = numProd;
         this.nomProd = nomProd;
         this.precio = precio;
+        this.cantidad = cantidad;
     }
+
+
 }

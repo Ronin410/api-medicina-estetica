@@ -40,4 +40,9 @@ public class InventarioService {
         inventarioRepository.deleteByIdProc(id);
         return true;
     }
+    
+    /*public boolean ActualizarInventario(int id) {
+        inventarioRepository.updateNumProd(2,2);
+        return true;
+    }*/
 }

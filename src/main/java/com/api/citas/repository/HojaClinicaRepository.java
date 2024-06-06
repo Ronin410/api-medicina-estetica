@@ -4,11 +4,8 @@
  */
 package com.api.citas.repository;
 
-import com.api.citas.dto.DetalleCitas;
-import java.util.List;
+import com.api.citas.dto.HojaClinica;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,12 +13,8 @@ import org.springframework.stereotype.Repository;
  * @author alejandro.bueno
  */
 @Repository
-public interface CitasDetallesRepository extends MongoRepository<DetalleCitas, String>{
-    
-    public List<DetalleCitas> findByIdCita(int id);
-    public void deleteByIdCitaAndNumProd(int id, int numProd);
+public interface HojaClinicaRepository extends MongoRepository<HojaClinica, String>{
+ 
+    public HojaClinica findByIdCita(int id);
     public void deleteByIdCita(int id);
-    
-
-
 }

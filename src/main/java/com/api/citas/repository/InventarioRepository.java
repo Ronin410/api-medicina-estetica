@@ -6,7 +6,10 @@ package com.api.citas.repository;
 
 import com.api.citas.dto.Inventario;
 import java.util.List;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,13 +20,8 @@ import org.springframework.stereotype.Repository;
 public interface InventarioRepository extends MongoRepository<Inventario, String>{
     public List<Inventario> findByIdProc(int id);
     public void deleteByIdProc(int id);
-
-    /*
-    public List<Inventario> findByCliente(String cliente);
-    public List<Inventario> findByIdCitaAndCliente(int id, String cliente);
-    public List<Inventario> findByClienteContaining(String cliente);
-    public List<Inventario> findByClienteContainingAndIdCita(String cliente, int id);
-    */
     
-    //public Citas findTopByOrderByIdCitaDesc();
+    @Override
+    public Inventario save(Inventario inventario);
+
 }

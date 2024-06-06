@@ -34,13 +34,16 @@ public class Citas{
     @Setter
     private int status;
     
-    
+    @Getter
+    @Setter
+    private int total;
 
-    public Citas(int idCita, String cliente, String doctora, LocalDateTime fecha, int status) {
+    public Citas(int idCita, String cliente, String doctora, LocalDateTime fecha, int status, int total) {
         this.idCita = idCita;
         this.cliente = cliente;
         this.doctora = doctora;
         this.fecha = fecha;
         this.status = status;
+        this.total = total;
     }
 }
