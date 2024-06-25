@@ -14,9 +14,22 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+
 //import com.itextpdf.layout.property.PageSize;
 /**
  *
@@ -48,53 +61,68 @@ public class HojaClinicaService {
         return true;
     }
 
-    public Object GenerarPdf(int id) throws FileNotFoundException, DocumentException, IOException {
-       boolean pdfCreado = false;
-        HojaClinica hojaClinica = null;
+    public byte[] GenerarPdf(int id) throws FileNotFoundException, DocumentException, IOException, JRException {
+
+        String destinationPath = "C://Users//alejandro.bueno//Desktop//Medicinaestetica//HojasClinicas//Reporte.pdf";
         
-        try{
-          hojaClinica = ConsultarHojaClinica(id);
+        //String filePath = "C:"+ File.separator + "Users"+ File.separator + "alejandro.bueno"+ File.separator + "Desktop"+ File.separator + "Medicinaestetica"+ File.separator + 
+        //"Reportes"+ File.separator + "MyReports"+ File.separator + "Reporte1.jrxml";
+
+        String filePath = "src"+ File.separator + "main"+ File.separator + "java"+ File.separator + "com"+ File.separator + "api"+ File.separator + 
+        "reports"+ File.separator + "template.jrxml";
         
-        Document document = new Document();//PdfWriter.pages.A4
-        PdfWriter.getInstance(document, new FileOutputStream("hoja_clinica.pdf"));
-                
-        String fontPath = "/path/to/Arial.ttf"; // Replace with the actual font file path
-        BaseFont font = BaseFont.createFont(fontPath, BaseFont.WINANSI, BaseFont.NOT_EMBEDDED);
-        Font tituloFont = new Font(font, 16, Font.BOLD);
+        HashMap<String, Object> parametros = new HashMap<>();  
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] sd ;
+        byte[] reportContent;
+        parametros.put("NOMBRECLIENTE","Alejandro Bueno Mendoza 1");
 
-        document.open();
+        try {
+            JasperReport report = JasperCompileManager.compileReport(filePath);
+            JasperPrint print = JasperFillManager.fillReport(report, parametros, new JREmptyDataSource());
 
-        Paragraph titulo = new Paragraph("Hoja Clínica", tituloFont);
-        document.add(titulo);
-
-        Paragraph paciente = new Paragraph("Paciente: " + hojaClinica.getCliente(), tituloFont);
-        document.add(paciente);
-
-        Paragraph fechaNacimiento = new Paragraph("Fecha de Nacimiento: " + hojaClinica.getFechaNacimiento(), tituloFont);
-        document.add(fechaNacimiento);
-
-        Paragraph doctora = new Paragraph("Doctora: " + hojaClinica.getDoctora(), tituloFont);
-        document.add(doctora);
-
-        Paragraph fechaAtencion = new Paragraph("Fecha de Atención: " + hojaClinica.getFechaAtencion(), tituloFont);
-        document.add(fechaAtencion);
-
-        Paragraph resumen = new Paragraph("Resumen: " + hojaClinica.getResumen(), tituloFont);
-        document.add(resumen);
-
-        Paragraph tratamiento = new Paragraph("Tratamiento: " + hojaClinica.getTratamiento(), tituloFont);
-        document.add(tratamiento);
-
-        Paragraph observaciones = new Paragraph("Observaciones: " + hojaClinica.getObservaciones(), tituloFont);
-        document.add(observaciones);
-
-        document.close();
-        }catch(Exception ex){
-            return false;
-        }
+            JasperExportManager.exportReportToPdfStream(print, baos);
       
-        return true;
+
+        } catch (JRException e) {
+            e.printStackTrace(); // Handle compilation errors (optional, but recommended)
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }finally {
+            try {
+                baos.close(); // Close the stream to ensure proper resource management
+            } catch (IOException e) {
+                e.printStackTrace(); // Handle potential I/O errors
+            }
+        }
+
+        return baos.toByteArray();
     }
 
-
 }
+
+
+/*
+public byte[] getItemReport(List<Item> items, String format) {
+            JasperExportManager.exportReportToPdfFile(print, destinationPath);
+            //ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+
+	JasperReport jasperReport;
+
+	try {
+
+		jasperReport = (JasperReport) JRLoader.loadObject(ResourceUtils.getFile("item-report.jasper"));
+	} catch (FileNotFoundException | JRException e) {
+	try {
+
+		  File file = ResourceUtils.getFile("classpath:item-report.jrxml");
+		  jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+		  JRSaver.saveObject(jasperReport, "item-report.jasper");
+		} catch (FileNotFoundException | JRException ex) {
+		  throw new RuntimeException(e);
+		}
+	}
+
+	//...
+}*/

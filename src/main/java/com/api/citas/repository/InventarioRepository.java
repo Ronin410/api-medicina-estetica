@@ -6,6 +6,7 @@ package com.api.citas.repository;
 
 import com.api.citas.dto.Inventario;
 import java.util.List;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -18,10 +19,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface InventarioRepository extends MongoRepository<Inventario, String>{
-    public List<Inventario> findByIdProc(int id);
+    public Inventario findByIdProc(int id);
     public void deleteByIdProc(int id);
     
     @Override
     public Inventario save(Inventario inventario);
-
+           
 }

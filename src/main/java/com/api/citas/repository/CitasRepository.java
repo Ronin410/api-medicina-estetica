@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 public interface CitasRepository extends MongoRepository<Citas, String> {
 
     public List<Citas> findByCliente(String cliente);
-    public List<Citas> findByIdCita(int id);
+    public Citas findByIdCita(int id);
     public List<Citas> findByIdCitaAndCliente(int id, String cliente);
     public List<Citas> findByClienteContaining(String cliente);
     public List<Citas> findByClienteContainingAndIdCita(String cliente, int id);

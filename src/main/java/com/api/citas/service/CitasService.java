@@ -52,7 +52,7 @@ public class CitasService {
             }else if(id > 0 && nombre.length() > 0 ){
                 citas = citasRepository.findByClienteContainingAndIdCita(nombre, id);
             }else if(id > 0){
-                citas = citasRepository.findByIdCita(id);
+                citas = (List<Citas>) citasRepository.findByIdCita(id);
             }else if(nombre.length() > 0){
                 citas = citasRepository.findByClienteContaining(nombre);
             }else if( fecha.length()>0){

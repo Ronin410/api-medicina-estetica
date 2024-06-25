@@ -21,6 +21,7 @@ public class InventarioService {
     
     public List<Inventario> ConsultarInventario(){
         List<Inventario> inventario = inventarioRepository.findAll();
+
         return inventario;
     }
 

@@ -7,8 +7,6 @@ package com.api.citas.repository;
 import com.api.citas.dto.DetalleCitas;
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**

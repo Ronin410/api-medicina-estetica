@@ -1,0 +1,24 @@
+#########Produccion
+FROM openjdk:17-alpine
+
+WORKDIR /app
+
+COPY target/*.jar app.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "app.jar"]
+
+########Debugueo
+#### Esta linea es para especificar que sistema operativo o aplicacion levantara nuestro contenedor
+#FROM openjdk:17-alpine
+
+#RUN npm i -g nodemon
+#RUN mkdir -p /app
+
+#### Se especifica cual es el directorio de nuestro proyecto
+#WORKDIR /app
+####Expondra el servicio al puerto de nuestra maquina
+#EXPOSE 8080
+####Comandos que se ejecutaran en cli para que corra el recurso
+#CMD ["java", "-jar", "app.jar"]

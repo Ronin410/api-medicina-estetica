@@ -1,0 +1,24 @@
+version: "1.0"
+services:
+  api.medicina:
+    build: 
+      context: .
+      containerfile: Containerfile.dev
+    ports:
+      - "8080:8080"
+    links:
+      - monguito
+    volumes:
+      - .:/app
+  monguito:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INIT_ROOT_USERNAME=alin
+      - MONGO_INIT_ROOT_PASSWORD=123
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

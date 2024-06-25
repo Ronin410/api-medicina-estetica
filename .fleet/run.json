@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "maven",
+            "name": "Medicina-Estetica",
+            "tasks": ["spring-boot:run"],
+            "args": [
+                "-Xdebug", //Habilita la depuración remota de Java.
+                "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000" //Configura la conexión de depuración remota
+            ],
+        },
+        
+    ]
+}

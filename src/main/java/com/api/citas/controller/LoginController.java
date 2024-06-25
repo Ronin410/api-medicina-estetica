@@ -35,8 +35,9 @@ public class LoginController {
    
     @CrossOrigin(origins = "*")
     @PostMapping("/login")
-    public Respuesta login(HttpServletRequest request, @RequestBody Credenciales credenciales) {       
+    public Respuesta login(HttpServletRequest request, @RequestBody Credenciales credenciales) {
         return new Respuesta(metaOk,loginService.login(credenciales));
+        
     }
 
     @CrossOrigin(origins = "*")
