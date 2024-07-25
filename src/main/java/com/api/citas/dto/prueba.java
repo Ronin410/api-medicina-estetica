@@ -15,31 +15,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author alejandro.bueno
  */
-@Document(collection = "ctl_usuarios")
+@Document(collection = "ctl_prueba")
 @JsonIgnoreProperties("_class")
-public class User {
-    
-    @Id
+public class prueba {
+    @Id // Mark this field as the ID
     @Getter
     @Setter
-    private ObjectId id;
-        
+    private ObjectId id; // Can be ObjectId, String, or other supported type
     @Getter
     @Setter
-    private int iduser;
-    
+    private String name;
     @Getter
     @Setter
-    private String pass;
-    
-    @Getter
-    @Setter
-    private String user;
+    private double price;
 
-    public User(ObjectId id, int iduser, String pass, String user) {
+    // Getters, setters, and other methods
+
+    public prueba(ObjectId id, String name, double price) {
         this.id = id;
-        this.iduser = iduser;
-        this.pass = pass;
-        this.user = user;
-    }   
+        this.name = name;
+        this.price = price;
+    }
 }

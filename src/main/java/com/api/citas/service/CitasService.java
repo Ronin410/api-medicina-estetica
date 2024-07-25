@@ -4,6 +4,7 @@ import com.api.citas.dto.Citas;
 import com.api.citas.repository.CitasRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,8 @@ public class CitasService {
     }
     
     public List<Citas> ConsultarCita(int id, String nombre, String fecha){
-         List<Citas> citas = null;
+         List<Citas> citas = new ArrayList<>();
+         Citas citaa;
         LocalDateTime fechaFormateada= null;
         LocalDateTime fechaSiguiente = null;
         try{
@@ -52,7 +54,8 @@ public class CitasService {
             }else if(id > 0 && nombre.length() > 0 ){
                 citas = citasRepository.findByClienteContainingAndIdCita(nombre, id);
             }else if(id > 0){
-                citas = (List<Citas>) citasRepository.findByIdCita(id);
+                citaa = citasRepository.findByIdCita(id);
+                citas.add(citaa);
             }else if(nombre.length() > 0){
                 citas = citasRepository.findByClienteContaining(nombre);
             }else if( fecha.length()>0){
@@ -70,15 +73,24 @@ public class CitasService {
 
     public boolean AgregarCita(Citas cita){  
         cita.setCliente(cita.getCliente().toUpperCase());
-        citasRepository.insert(cita);
+        citasRepository.save(cita);
         return true;
     } 
     
     public boolean ModificarCita(Citas cita){
+        List<Citas> citabd;
         
         try{
-            citasRepository.deleteByIdCita(cita.getIdCita());
-            AgregarCita(cita);
+            citabd = ConsultarCita(cita.getIdCita(), "","");
+            
+            citabd.get(0).setCliente(cita.getCliente());
+            citabd.get(0).setDoctora(cita.getDoctora());
+            citabd.get(0).setFecha(cita.getFecha());
+            citabd.get(0).setStatus(cita.getStatus());
+            citabd.get(0).setTotal(cita.getTotal());
+            
+            citasRepository.save(citabd.get(0));
+
         }catch(Exception e){
             return false;
         }

@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JRException;
@@ -40,7 +41,7 @@ public class HojaClinicaService {
         
     @Autowired
     HojaClinicaRepository hojaClinicaRepository;
-        
+            
     public HojaClinica ConsultarHojaClinica(int id){
         HojaClinica hojaClinica = null;
         try{      
@@ -52,30 +53,42 @@ public class HojaClinicaService {
     }
 
     public Object AgregarHojaClinica(HojaClinica hojaClinica) {
-        
-        hojaClinicaRepository.deleteByIdCita(hojaClinica.getIdCita());
-        
+        HojaClinica hojaClinicabd;
+        //hojaClinicaRepository.deleteByIdCita(hojaClinica.getIdCita());
+        hojaClinicabd = ConsultarHojaClinica(hojaClinica.getIdCita());
+        //hojaClinica.setIdCita(hojaClinicabd.getIdCita());
+        hojaClinica.setId(hojaClinicabd.getId());
         hojaClinica.setCliente(hojaClinica.getCliente().toUpperCase());
         hojaClinica.setDoctora(hojaClinica.getDoctora().toUpperCase());      
-        hojaClinicaRepository.insert(hojaClinica);
+        hojaClinicaRepository.save(hojaClinica);
         return true;
     }
 
     public byte[] GenerarPdf(int id) throws FileNotFoundException, DocumentException, IOException, JRException {
-
-        String destinationPath = "C://Users//alejandro.bueno//Desktop//Medicinaestetica//HojasClinicas//Reporte.pdf";
-        
+   
+        HojaClinica hojaConsultada;
+        String fechaNacimiento;
+        String fechaAtencion;
         //String filePath = "C:"+ File.separator + "Users"+ File.separator + "alejandro.bueno"+ File.separator + "Desktop"+ File.separator + "Medicinaestetica"+ File.separator + 
         //"Reportes"+ File.separator + "MyReports"+ File.separator + "Reporte1.jrxml";
 
         String filePath = "src"+ File.separator + "main"+ File.separator + "java"+ File.separator + "com"+ File.separator + "api"+ File.separator + 
-        "reports"+ File.separator + "template.jrxml";
+        "reports"+ File.separator + "HojaClinica.jrxml";
         
         HashMap<String, Object> parametros = new HashMap<>();  
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        byte[] sd ;
-        byte[] reportContent;
-        parametros.put("NOMBRECLIENTE","Alejandro Bueno Mendoza 1");
+
+        hojaConsultada = ConsultarHojaClinica(id);
+                
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ejemplo: formato ISO-8601
+             
+        parametros.put("antecedentes",hojaConsultada.getAntecedentes());
+        parametros.put("resumen",hojaConsultada.getResumen());
+        parametros.put("tratamiento",hojaConsultada.getTratamiento());
+        parametros.put("observaciones",hojaConsultada.getObservaciones());
+        parametros.put("nombrePaciente",hojaConsultada.getCliente());
+        parametros.put("fechaNac",hojaConsultada.getFechaNacimiento().format(formatter));
+        parametros.put("fechaConsulta",hojaConsultada.getFechaAtencion().format(formatter));
 
         try {
             JasperReport report = JasperCompileManager.compileReport(filePath);

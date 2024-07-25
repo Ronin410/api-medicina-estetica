@@ -3,6 +3,8 @@ package com.api.citas.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -13,6 +15,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @JsonIgnoreProperties("_class")
 public class DetalleCitas {
  
+    @Id
+    @Getter
+    @Setter
+    private ObjectId id;
+    
     @Getter
     @Setter
     private int idCita;
@@ -33,7 +40,8 @@ public class DetalleCitas {
     @Setter
     private int cantidad;
 
-    public DetalleCitas(int idCita, int numProd, String nomProd, float precio, int cantidad) {
+    public DetalleCitas(ObjectId id, int idCita, int numProd, String nomProd, float precio, int cantidad) {
+        this.id = id;
         this.idCita = idCita;
         this.numProd = numProd;
         this.nomProd = nomProd;
@@ -41,5 +49,6 @@ public class DetalleCitas {
         this.cantidad = cantidad;
     }
 
+    
 
 }

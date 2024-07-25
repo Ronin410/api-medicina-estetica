@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HojaClinica" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6e375a1f-d1ce-4f13-afa9-1379de9f2d86">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="antecedentes" class="java.lang.String"/>
+	<parameter name="resumen" class="java.lang.String"/>
+	<parameter name="tratamiento" class="java.lang.String"/>
+	<parameter name="observaciones" class="java.lang.String"/>
+	<parameter name="nombrePaciente" class="java.lang.String"/>
+	<parameter name="fechaNac" class="java.lang.String"/>
+	<parameter name="fechaConsulta" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="93" splitType="Stretch">
+			<staticText>
+				<reportElement x="415" y="10" width="50" height="20" uuid="5102b3c6-be9a-4f6e-91af-27113f67333f"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="465" y="10" width="84" height="20" uuid="faf9dcab-3f80-40ae-bc3f-4cfc26a55fa2"/>
+				<textFieldExpression><![CDATA[$P{fechaConsulta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="95" y="0" width="210" height="25" uuid="5441df77-83da-4bac-ac73-4a8dac045306">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Medicina estetica Alin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="55" width="205" height="15" uuid="8fc57181-03c5-426b-bb44-ed8f8718d994"/>
+				<text><![CDATA[Tel. 6671400550]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="25" width="205" height="15" uuid="3d9eb7fe-daf7-4487-b24f-05025e87de64"/>
+				<text><![CDATA[Calle de los crisantemos #1841]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="40" width="205" height="15" uuid="2ab66e28-1838-4cc4-8d19-8c9ad567a149"/>
+				<text><![CDATA[Culiacán, Sinalia 230570]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="70" width="205" height="15" uuid="7de652b4-09d6-4f5d-9a1c-f553bb3c2fa9"/>
+				<text><![CDATA[Doctora: Alin Yuritzi Zavala Olais]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="7" width="80" height="78" uuid="dc543dfe-caa8-4ec4-83ad-98a09bd0e643"/>
+				<imageExpression><![CDATA["src\\main\\java\\com\\api\\reports\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="-4" y="2" width="150" height="30" uuid="340737a2-da0a-43a4-919c-3482a048352c"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre del paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-5" y="23" width="153" height="30" uuid="f9a029c3-d3ab-4ab4-8db2-69b52f9f6476"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de nacimiento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="135" y="4" width="397" height="17" uuid="466b3eb2-6e2b-441f-b951-8ba9071e979a"/>
+				<textFieldExpression><![CDATA[$P{nombrePaciente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="25" width="397" height="17" uuid="f76dd494-de85-41cc-b739-088a21a712e2"/>
+				<textFieldExpression><![CDATA[$P{fechaNac}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="656" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="100" height="30" uuid="da80e070-0838-4ca2-b6ca-881f5278cd64"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Antecedentes:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="10" y="20" width="539" height="120" uuid="798f43b2-e07c-461d-8ef6-097275a81036"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="158" width="100" height="30" uuid="787aecc5-6e78-4e1a-8d6f-7cc8895c6b10"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumen:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="10" y="182" width="539" height="120" uuid="44c3d4e3-ca75-4b38-a6d0-5499dee7a9b9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="8" y="310" width="100" height="30" uuid="ea55eed2-b846-4e5a-840f-f6220eda1871"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tratamientos:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="10" y="334" width="539" height="119" uuid="6027cabe-6e01-4e81-9ca7-5d22d1e3e30d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="8" y="468" width="100" height="30" uuid="fce92d20-f2af-4dcd-87a4-11b5d6031cfb"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observaciones:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="10" y="492" width="539" height="119" uuid="6dc4aa64-a179-46be-8e1d-624025edc4ef"/>
+			</rectangle>
+			<textField>
+				<reportElement x="11" y="23" width="538" height="117" uuid="f04f23d8-1c00-4c6d-8cd8-1cbe810d8705"/>
+				<textFieldExpression><![CDATA[$P{antecedentes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="184" width="538" height="117" uuid="2b74930f-062f-416b-ae9f-e90da0089514"/>
+				<textFieldExpression><![CDATA[$P{resumen}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="335" width="538" height="117" uuid="2e279d8c-74bb-4384-9255-9c49ca725621"/>
+				<textFieldExpression><![CDATA[$P{tratamiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="494" width="538" height="117" uuid="b57bc6ec-b06a-49c9-bf77-3bd2e9ac0580"/>
+				<textFieldExpression><![CDATA[$P{observaciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="196" y="640" width="169" height="16" uuid="7d9af732-8ffd-421b-8310-184a1ac804d4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dra. Alin Yuritzi Zavala Olais]]></text>
+			</staticText>
+			<line>
+				<reportElement x="136" y="638" width="290" height="1" uuid="7460387b-cc26-4294-8cf2-7384b4a54ead"/>
+			</line>
+		</band>
+	</columnHeader>
+</jasperReport>

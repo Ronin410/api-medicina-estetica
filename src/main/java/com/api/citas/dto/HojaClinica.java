@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -19,6 +21,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @JsonIgnoreProperties("_class")
 public class HojaClinica {
  
+    @Id
+    @Getter
+    @Setter
+    private ObjectId id;
+        
     @Getter
     @Setter
     private int idCita;
@@ -53,9 +60,10 @@ public class HojaClinica {
     
     @Getter
     @Setter
-    private String observaciones;    
+    private String observaciones;
 
-    public HojaClinica(int idCita, String cliente, String doctora, LocalDate fechaAtencion, LocalDate fechaNacimiento, String antecedentes, String resumen, String tratamiento, String observaciones) {
+    public HojaClinica(ObjectId id, int idCita, String cliente, String doctora, LocalDate fechaAtencion, LocalDate fechaNacimiento, String antecedentes, String resumen, String tratamiento, String observaciones) {
+        this.id = id;
         this.idCita = idCita;
         this.cliente = cliente;
         this.doctora = doctora;
@@ -66,4 +74,6 @@ public class HojaClinica {
         this.tratamiento = tratamiento;
         this.observaciones = observaciones;
     }
+    
+    
 }

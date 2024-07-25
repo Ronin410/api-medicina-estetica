@@ -106,4 +106,21 @@ public class InventarioController {
             return new Respuesta(metaOk,"Necesita un token de sesion");
         }
     }
+    
+    @CrossOrigin(origins = "*")
+    @GetMapping("/ultimo")
+    public Respuesta UltimoIdInventario(HttpServletRequest request){
+        
+        String token = request.getHeader("Authorization");
+        
+        if(token != null){
+            if(JwtUtil.validateToken(token.substring("Bearer ".length()))){
+                return new Respuesta(metaOk, inventarioService.Ultimo());
+            }else{
+                return new Respuesta(metaOk,"El token no es valido");
+            }
+        }else{
+            return new Respuesta(metaOk,"Necesita un token de sesion");
+        }
+    }
 }

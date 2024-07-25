@@ -30,20 +30,44 @@ public class InventarioService {
         return true;
     }
 
-    public boolean ModificarInventario(Inventario inventario) {
-        inventarioRepository.deleteByIdProc(inventario.getIdProc());
-        AgregarInventario(inventario);
+    public boolean ModificarInventario(Inventario inventario){
+        Inventario Inventariobd;
         
+        try{
+            Inventariobd = ConsultarIdInventario(inventario.getIdProc());
+            
+            Inventariobd.setNomProc(inventario.getNomProc());
+            Inventariobd.setPrecio(inventario.getPrecio());
+            Inventariobd.setCantidad(inventario.getCantidad());
+                       
+            inventarioRepository.save(Inventariobd);
+
+        }catch(Exception e){
+            return false;
+        }
         return true;
-    }
+    }  
+    
+    
 
     public boolean EliminarInventario(int id) {
         inventarioRepository.deleteByIdProc(id);
         return true;
     }
     
-    /*public boolean ActualizarInventario(int id) {
-        inventarioRepository.updateNumProd(2,2);
-        return true;
-    }*/
+    public Inventario ConsultarIdInventario(int idInventario){
+        
+        return inventarioRepository.findByIdProc(idInventario);
+
+    }
+    
+    public int Ultimo(){
+    
+        Inventario inventario = inventarioRepository.findTopByOrderByIdProcDesc();
+        if (inventario == null){
+            return 0;
+        }
+        return inventario.getIdProc();
+    }
+    
 }

@@ -4,9 +4,7 @@
  */
 package com.api.citas.repository;
 
-import com.api.citas.dto.User;
-import java.util.List;
-import java.util.Optional;
+import com.api.citas.dto.prueba;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -16,14 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author alejandro.bueno
  */
 @Repository
-public interface UserRepository extends MongoRepository<User, ObjectId> {
-    public User findByUser(String user);
-    
-    public Optional<User> findByIduser(int id);
-
-    public User findByUserAndPass(String user, String pass);
-    
-    public List<User> findByPass(String pass);
-
+public interface PruebaRepository extends MongoRepository<prueba, ObjectId>{
 
 }

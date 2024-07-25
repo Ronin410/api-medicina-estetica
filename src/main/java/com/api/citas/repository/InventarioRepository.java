@@ -24,5 +24,7 @@ public interface InventarioRepository extends MongoRepository<Inventario, String
     
     @Override
     public Inventario save(Inventario inventario);
-           
+    
+    public Inventario findTopByOrderByIdProcDesc();
+
 }
